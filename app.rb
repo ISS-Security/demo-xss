@@ -29,7 +29,7 @@ use SecureHeaders::Middleware
 
 ## Adjust settings below to see how it affects the page:
 ## - config.csp: script_src, style_src (remove CDN sites)
-## - frame_ancestors
+## - config.csp: style_src (add/remove 'unsafe-inline' to catch browser plugin CSS injections e.g., Pocket)
 SecureHeaders::Configuration.default do |config|
   config.cookies = {
     secure: true, # mark all cookies as "Secure"
