@@ -10,9 +10,6 @@ end
 post '/' do
   conversation = session['board'] || ''
   session['board'] = conversation + '<br>' + params[:message]
-  @messages = params[:messages] +
-              '<br>' +
-              params[:message]
   slim :home
 end
 
