@@ -1,6 +1,7 @@
 require 'sinatra'
 
 use Rack::Session::Cookie, secret: 'not-so-secret'
+enable :logging
 
 get '/' do
   slim :home
@@ -23,12 +24,11 @@ end
 ## START SecureHeaders Setup: Comment out the following to disable protection
 require 'secure_headers'
 use SecureHeaders::Middleware
-## Choose between default and customized setup (see below)
-## - default setups should add:
+## Choose between default (next line) and customized setup (see below)
 # SecureHeaders::Configuration.default
 
 ## Adjust settings below to see how it affects the page:
-## - config.csp: script_src, style_src (remove CDN sites)
+## - config.csp: script_src, style_src, font-src (comment out to catch bootstrap scripts/styles/fonts)
 ## - config.csp: style_src (add/remove 'unsafe-inline' to catch browser plugin CSS injections e.g., Pocket)
 SecureHeaders::Configuration.default do |config|
   config.cookies = {
@@ -50,13 +50,13 @@ SecureHeaders::Configuration.default do |config|
     preserve_schemes: true, # default: false. Schemes are removed from host sources to save bytes and discourage mixed content.
 
     # directive values: these values will directly translate into source directives
-    default_src: %w(https: 'self'),
+    default_src: %w('self'),
     child_src: %w('self'),
-    connect_src: %w(wws:),
-    font_src: %w(https: maxcdn.bootstrapcdn.com),
+    connect_src: %w(wws:), # valid sources for fetch, XMLHttpRequest, WebSocket, and EventSource connections
     img_src: %w('self'),
-    script_src: %w(https: code.jquery.com maxcdn.bootstrapcdn.com),
-    style_src: %w(https: maxcdn.bootstrapcdn.com 'unsafe-inline'),
+    font_src: %w('self' https://maxcdn.bootstrapcdn.com),
+    script_src: %w('self' https://code.jquery.com https://maxcdn.bootstrapcdn.com),
+    style_src: %w('self' https://maxcdn.bootstrapcdn.com 'unsafe-inline'),
     form_action: %w('self'), # valid endpoints for form actions
     frame_ancestors: %w('none'), # valid parents that may embed a page using the <frame> and <iframe> elements
     plugin_types: %w('none'),
@@ -67,5 +67,5 @@ SecureHeaders::Configuration.default do |config|
 end
 
 post '/report_csp_violation' do
-  puts "CSP VIOLATION: #{request.body.read}"
+  logger.info("CSP VIOLATION: #{request.body.read}")
 end
