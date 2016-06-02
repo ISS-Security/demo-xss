@@ -1,0 +1,33 @@
+div class="container"
+  div class="row"
+    form action="/" method="post"
+      input type="text" name="message"
+      input type="hidden" name="messages" value="#{@messages}"
+  div class="row"
+    h4 Notes:
+    div class="container" id='board'
+      / XSS: using == instead of = will 'escape' HTML specific characters, which disables any HTML or script injection
+      == session['board']
+  div class="row"
+    div class="col-sm-12" style="height:20px;"
+  div class="row"
+    a href="/clear" clear all notes
+    = " | "
+    a data-toggle="collapse" href="#instructions" aria-expanded="false" aria-controls="instructions" instructions
+
+div class="container collapse" id="instructions"
+  div class="row"
+    div class="col-sm-12"
+      span Enter the following to conduct javacript injection:
+  div class="row"
+    div class="col-sm-1"
+    div class="col-sm-11"
+      div class="well"
+        code
+          = "<SCRIPT>alert('This site is vulnerable to XSS');</SCRIPT>"
+  div class="row"
+    div class="col-sm-1"
+    div class="col-sm-11"
+      div class="well"
+        code
+          = "<SCRIPT>alert('msg: ' + document.getElementById('board').innerText);</SCRIPT>"
