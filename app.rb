@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'slim'
 
 disable :protection
 use Rack::Session::Cookie, secret: 'not-so-secret'
@@ -38,12 +39,13 @@ SecureHeaders::Configuration.default do |config|
       strict: true # mark all cookies as SameSite=Strict
     }
   }
+
   config.x_frame_options = "DENY" # The page cannot be displayed in a frame, regardless of the site attempting to do so
   config.x_content_type_options = "nosniff"
   config.x_xss_protection = "1" # instructs the user-agent to block the response in the event that script has been inserted from user input, instead of sanitizing
-  config.x_download_options = "noopen" # user agent should not automatically open any downloads from this page
   config.x_permitted_cross_domain_policies = "none" # don’t allow content producers to embed your work in their content
   config.referrer_policy = "origin-when-cross-origin" # navigations to other sites will only send hostname as referral URL
+
   config.csp = {
     # "meta" values. these will shaped the header, but the values are not included in the header.
     report_only: false,     # false: actually disable unwanted features; true: report but don't disable
