@@ -11,7 +11,7 @@ end
 
 post '/' do
   conversation = session['board'] || ''
-  session['board'] = conversation + '<br>' + params[:message]
+  session['board'] = '<br>' + params[:message] + '<br>' + conversation
   slim :home
 end
 
@@ -20,7 +20,7 @@ get '/clear/?' do
   redirect '/'
 end
 
-## START Security Setup: Comment out the following to disable protection
+## START Security Setup: Comment out the rest of the file to disable protection
 use Rack::Protection, reaction: :drop_session # protects against CSRF (requires `disable :protection` before `use Rack::Session::...`)
 
 require 'secure_headers'
