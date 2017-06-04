@@ -1,7 +1,6 @@
 require 'sinatra'
 require 'slim'
 
-disable :protection
 use Rack::Session::Cookie, secret: 'not-so-secret'
 enable :logging
 
@@ -21,7 +20,9 @@ get '/clear/?' do
 end
 
 ## START Security Setup: Comment out the rest of the file to disable protection
-use Rack::Protection, reaction: :drop_session # protects against CSRF (requires `disable :protection` before `use Rack::Session::...`)
+
+## Uncomment to drop the login session in case of any violation
+# use Rack::Protection, reaction: :drop_session # protects against CSRF (requires `disable :protection` before `use Rack::Session::...`)
 
 require 'secure_headers'
 use SecureHeaders::Middleware
