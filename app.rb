@@ -41,31 +41,31 @@ SecureHeaders::Configuration.default do |config|
     }
   }
 
-  config.x_frame_options = "DENY" # The page cannot be displayed in a frame, regardless of the site attempting to do so
-  config.x_content_type_options = "nosniff"
-  config.x_xss_protection = "1" # instructs the user-agent to block the response in the event that script has been inserted from user input, instead of sanitizing
-  config.x_permitted_cross_domain_policies = "none" # don’t allow content producers to embed your work in their content
-  config.referrer_policy = "origin-when-cross-origin" # navigations to other sites will only send hostname as referral URL
+  config.x_frame_options = 'DENY' # Do not let this page be displayed in a frame
+  config.x_content_type_options = 'nosniff' # Do not let anyone change HTTPS
+  config.x_xss_protection = '1' # Block response if a script found in user input
+  config.x_permitted_cross_domain_policies = 'none' # Don't let others embed me
+  config.referrer_policy = 'origin-when-cross-origin' # Only report this site's hostname if user nagivates to other site
 
   config.csp = {
-    # "meta" values. these will shaped the header, but the values are not included in the header.
-    report_only: false,     # false: actually disable unwanted features; true: report but don't disable
-    preserve_schemes: true, # default: false. Schemes are removed from host sources to save bytes and discourage mixed content.
+    # "meta" values: these keys will be inserted into header
+    report_only: false,     # false: disable unwanted features; true: report but don't disable
+    preserve_schemes: true, # default: false. Schemes are removed from host sources to save bytes and discourage mixed content
 
-    # directive values: these values will directly translate into source directives
-    default_src: %w('self'), # Fall back to this specification if a *_src configuration not defined
-    child_src: %w('self'), #
-    connect_src: %w(wws:), # valid sources for fetch, XMLHttpRequest, WebSocket, and EventSource connections
-    img_src: %w('self'),
-    font_src: %w('self' https://maxcdn.bootstrapcdn.com),
-    script_src: %w('self' https://code.jquery.com https://maxcdn.bootstrapcdn.com),
-    style_src: %w('self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com),
-    form_action: %w('self'), # valid endpoints for form actions
-    frame_ancestors: %w('none'), # valid parents that may embed a page using the <frame> and <iframe> elements
-    plugin_types: %w('none'),
+    # directive values: these keys + values be inserted into header
+    default_src: %w['self'], # Use 'self' if a *_src configuration not defined
+    child_src: %w['self'], #
+    connect_src: %w[wws:], # valid sources for fetch, XMLHttpRequest, WebSocket, and EventSource connections
+    img_src: %w['self'],
+    font_src: %w['self' https://maxcdn.bootstrapcdn.com],
+    script_src: %w['self' https://code.jquery.com https://maxcdn.bootstrapcdn.com],
+    style_src: %w['self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com],
+    form_action: %w['self'], # valid endpoints for form actions
+    frame_ancestors: %w['none'], # valid parents that may embed a page using the <frame> and <iframe> elements
+    object_src: %w['none'],
     block_all_mixed_content: true, # see http://www.w3.org/TR/mixed-content/
-    upgrade_insecure_requests: true, # see https://www.w3.org/TR/upgrade-insecure-requests/
-    report_uri: %w(/report_csp_violation) # submit CSP violations by POST method
+
+    report_uri: %w[/report_csp_violation] # submit CSP violations by POST method
   }
 end
 
