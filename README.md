@@ -3,21 +3,25 @@
 This project demonstrates how to conduct and prevent XSS attacks
 
 ## Install
-    $ git clone <...>
-    $ cd demo_xss
-    $ bundlle install
+
+    git clone <...>
+    cd demo_xss
+    bundlle install
 
 ## Execute
-    $ ruby app.rb
+
+    ruby app.rb
 
 Now view at the site at `http://localhost:4567` or whichever port it is on.
 
 ## Play
+
 Look at the running site and open the 'instructions' link to see what kind of text input you could enter to conduct a script injection attack.
 
 Search within the code of this project (`*.rb` and `views/*.slim`) for 'XSS' -- you should find comments on how make modifications to prevent XSS attacks.
 
 ## Readings on XSS
+
 - Overview of XSS Concepts
   - [How to Prevent XSS](http://www.lauradhamilton.com/how-to-prevent-xss)
   - [An Overview of HTTP Security Headers](https://www.dionach.com/blog/an-overview-of-http-security-headers)

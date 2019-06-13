@@ -19,17 +19,19 @@ get '/clear/?' do
   redirect '/'
 end
 
-## START Security Setup: Comment out the rest of the file to disable protection
+## START Security Setup:
+## - Comment out the rest of the file to disable protection
+## - Uncomment rest of the file to enable protection
 
-## Uncomment to drop the login session in case of any violation
+# # Uncomment to drop the login session in case of any violation
 # use Rack::Protection, reaction: :drop_session # protects against CSRF (requires `disable :protection` before `use Rack::Session::...`)
 
 # require 'secure_headers'
 # use SecureHeaders::Middleware
 
-## Adjust settings below to see how it affects the page:
-## - config.csp: script_src, style_src, font-src (comment out to catch bootstrap scripts/styles/fonts)
-## - config.csp: style_src (add/remove 'unsafe-inline' to catch browser plugin CSS injections e.g., Pocket)
+# # Adjust settings below to see how it affects the page:
+# # - config.csp: script_src, style_src, font-src (comment out to catch bootstrap scripts/styles/fonts)
+# # - config.csp: style_src (add/remove 'unsafe-inline' to catch browser plugin CSS injections e.g., Pocket)
 # SecureHeaders::Configuration.default do |config|
 #   config.cookies = {
 #     secure: true, # mark all cookies as "Secure"
