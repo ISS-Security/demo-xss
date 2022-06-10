@@ -70,5 +70,5 @@ end
 # end
 
 # post '/report_csp_violation' do
-#   logger.info("CSP VIOLATION: #{request.body.read}")
+#   logger.warn("CSP VIOLATION: #{request.body.read}")
 # end
