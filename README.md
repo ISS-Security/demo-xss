@@ -6,7 +6,7 @@ This project demonstrates how to conduct and prevent XSS attacks
 
     git clone <...>
     cd demo_xss
-    bundlle install
+    bundle install
 
 ## Execute
 
