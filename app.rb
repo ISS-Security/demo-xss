@@ -69,6 +69,7 @@ end
 #   }
 # end
 
+# # This route might be blocked by browser blocker plugins (e.g., uBlock Origin)
 # post '/report_csp_violation' do
 #   logger.warn("CSP VIOLATION: #{request.body.read}")
 # end
