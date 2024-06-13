@@ -63,7 +63,6 @@ end
 #     form_action: %w['self'], # valid endpoints for form actions
 #     frame_ancestors: %w['none'], # valid parents that may embed a page using the <frame> and <iframe> elements
 #     object_src: %w['none'],
-#     block_all_mixed_content: true, # see http://www.w3.org/TR/mixed-content/
 
 #     report_uri: %w[/report_csp_violation] # submit CSP violations by POST method
 #   }

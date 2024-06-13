@@ -16,7 +16,7 @@ Now view at the site at `http://localhost:4567` or whichever port it is on.
 
 ## Play
 
-Look at the running site and open the 'instructions' link to see what kind of text input you could enter to conduct a script injection attack.
+Look at the running site and open the 'hacking instructions' link to see what kind of text input you could enter to conduct a script injection attack.
 
 Search within the code of this project (`*.rb` and `views/*.slim`) for 'XSS' -- you should find comments on how make modifications to prevent XSS attacks.
 
