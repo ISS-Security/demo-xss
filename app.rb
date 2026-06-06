@@ -54,8 +54,9 @@ end
 
 #     # directive values: these keys + values be inserted into header
 #     default_src: %w['self'], # Use 'self' if a *_src configuration not defined
+#     base_uri: %w['self'], # restrict <base> tag: blocks injected <base> from redirecting relative URLs (no default-src fallback)
 #     child_src: %w['self'], #
-#     connect_src: %w[wws:], # valid sources for fetch, XMLHttpRequest, WebSocket, and EventSource connections
+#     connect_src: %w[wss:], # valid sources for fetch, XMLHttpRequest, WebSocket, and EventSource connections
 #     img_src: %w['self'],
 #     font_src: %w['self' https://maxcdn.bootstrapcdn.com],
 #     script_src: %w['self' https://code.jquery.com https://maxcdn.bootstrapcdn.com],
